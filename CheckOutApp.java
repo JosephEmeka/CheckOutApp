@@ -8,9 +8,6 @@ import java.time.format.DateTimeFormatter;
 
 
 
-
-
-
 public class CheckOutApp{
 
 
@@ -30,8 +27,17 @@ public class CheckOutApp{
 
 	Item items;
 
+	float vatPercentage = 17.50;
+
+
+	public static double total;
+
+	
+	
+
 
 		public static void main(String[] arg){
+
 
 			startMenu();
 
@@ -74,11 +80,13 @@ public class CheckOutApp{
 
 
 
+
+
+
 			public static void startMenu(){
 
 
 				System.out.println ("What is the customer's Name?  ");
-
 
 					
 					String myCustomerName = input.nextLine();
@@ -119,7 +127,7 @@ public class CheckOutApp{
 
 			public static void addMoreItem(){
 
-				Scanner input = new Scanner(System.in);
+				//Scanner input = new Scanner(System.in);
 
 				System.out.println ("Add more Items? Type Yes or No  ");
 
@@ -149,7 +157,7 @@ public class CheckOutApp{
 
 			public static void repeatMenu(){
 				
-				Scanner input = new Scanner(System.in);
+				//Scanner input = new Scanner(System.in);
 
 
 				System.out.println ("What did the user buy?  ");
@@ -193,7 +201,7 @@ public class CheckOutApp{
 
 				System.out.println ("How much discount will he get?  ");
 
-				String discount = input.nextLine();
+				double discount = input.nextDouble();
 
 				customersInvoice();
 
@@ -216,6 +224,7 @@ public class CheckOutApp{
 			
 
 			public static void setCashierName(String thisCashierName){
+
 				cashierName = thisCashierName;
 
 			
@@ -225,12 +234,42 @@ public class CheckOutApp{
 			
 
 			public static void setCustomerName(String thisCustomerName){
+
 				customerName = thisCustomerName;
 
 			
 			}
 			
 			
+			public static void calculateDiscount(double total, double discount) {
+
+			double total = 0.0;
+
+    				for (Item items : itemList) {
+
+        				total += items.getTotalAmount();
+
+    					}
+
+    			discount/100 * total;
+
+				}
+
+			public static void calculateVAT(double total, float vatPercentage) {
+
+				double total = 0.0;
+
+    				for (Item items : itemList) {
+
+        				total += items.getTotalAmount();
+
+    					}
+
+
+
+    			 (vatPercentage/100)*total;
+
+			}
 
 			
 
@@ -250,13 +289,13 @@ public class CheckOutApp{
 				System.out.println("  Cashier: " + cashierName);
 				System.out.println("  Customer Name: " + customerName);
 				System.out.println("==================================================================");
-				System.out.println("  ITEM \t\tQTY \t\tPRICE \t\tTOTAL(NGN) ");
+				System.out.println("  ITEM \t\tPRICE \t\tQTY \t\tTOTAL(NGN) ");
 				System.out.println("-------------------------------------------------------------------");
 				printItemDetails();
 				System.out.println("-------------------------------------------------------------------");
-				System.out.print("\t\t\t\tSub Total:   "); subTotal();
-
-
+				System.out.print("\t\t\t\tSub Total:        "); subTotal();
+				System.out.print("\t\t\t\tDiscount:         " + calculateDiscount);
+				System.out.print("\t\t\t\tVAT @ 17.50% :         " + calculateVAT);
 
 	
 			}
