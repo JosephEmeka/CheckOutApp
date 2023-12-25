@@ -35,6 +35,14 @@ public class CheckOutApp{
 
 	public static double discount;
 
+
+	
+	public static double customerPayment;
+
+
+
+	public static double customerAmountPaid; 
+
 	
 	
 
@@ -43,6 +51,10 @@ public class CheckOutApp{
 
 
 			startMenu();
+
+			secondMenu();
+
+			
 
 		
 		
@@ -75,8 +87,7 @@ public class CheckOutApp{
 					
     					}
 
-				//System.out.println(total);
-
+			
     				return total;
 
 				
@@ -245,8 +256,6 @@ public class CheckOutApp{
 			
 			
 			public static double calculateDiscount() {
-			
-			
     			
 			double myDiscount = (discount / 100) * total;
     
@@ -299,6 +308,7 @@ public class CheckOutApp{
 				System.out.println("  DATE: " + myCalender.getTime());
 				System.out.println("  Cashier: " + cashierName);
 				System.out.println("  Customer Name: " + customerName);
+				System.out.println("                   ");
 				System.out.println("==================================================================");
 				System.out.println("  ITEM \t\tPRICE \t\tQTY \t\tTOTAL(NGN) ");
 				System.out.println("-------------------------------------------------------------------");
@@ -316,7 +326,71 @@ public class CheckOutApp{
 
 
 			
+			public static void secondMenu(){
 
+				Scanner input = new Scanner(System.in);
+
+				System.out.println("How much did tHe customer give you? ");
+
+				customerPayment = input.nextDouble();
+
+				customersReceipt();
+
+			}
+
+
+
+
+			public static double amountPaid(){
+
+			 	customerAmountPaid = customerPayment;
+
+				return customerAmountPaid;
+
+				}
+
+				
+			public static double balance(){
+
+			 	double customerBalance = customerAmountPaid - totalBill();
+
+				return customerBalance;
+
+				}
+
+
+
+
+			public static void customersReceipt(){
+				System.out.println("  		       ");
+				System.out.println("                   ");
+				System.out.println("                   ");
+				System.out.println("  SEMICOLON  STORES");
+				System.out.println("  MAIN BRANCH");
+				System.out.println("  LOCATION: 312, HERBERT MACAULAY WAY, SABO YABA, LAGOS.");
+				System.out.println("  TELL:  03293828343");
+				System.out.println("  DATE: " + myCalender.getTime());
+				System.out.println("  Cashier: " + cashierName);
+				System.out.println("  Customer Name: " + customerName);
+				System.out.println("                   ");
+				System.out.println("==================================================================");
+				System.out.println("  ITEM \t\tPRICE \t\tQTY \t\tTOTAL(NGN) ");
+				System.out.println("-------------------------------------------------------------------");
+				printItemDetails();
+				System.out.println("-------------------------------------------------------------------");
+				System.out.println("\t\t\t\tSub Total:        " + subTotal()); 
+				System.out.println("\t\t\t\tDiscount:         " + calculateDiscount());
+				System.out.println("\t\t\t\tVAT @ 17.50% :    " + calculateVAT());
+				System.out.println("==================================================================");
+				System.out.println("\t\t\t\tBill Total:        " + totalBill()); 
+				System.out.println("\t\t\t\tAmount Paid:        " + amountPaid());
+				System.out.println("\t\t\t\tBalance:        " + balance());
+				System.out.println("==================================================================");
+				System.out.println("           THANKS FOR YOUR PATRONAGE");
+				System.out.println("==================================================================");
+			}
+
+			
 
 }
 
