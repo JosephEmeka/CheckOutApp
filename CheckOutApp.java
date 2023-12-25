@@ -207,7 +207,7 @@ public class CheckOutApp{
 
 				System.out.println ("How much discount will he get?  ");
 
-				double discount = input.nextDouble();
+				discount = input.nextDouble();
 
 				customersInvoice();
 
@@ -245,14 +245,8 @@ public class CheckOutApp{
 			
 			
 			public static double calculateDiscount() {
-
-
-    				for (Item items : itemList) {
-
-        				total += items.getTotalAmount();
-
-    					}
-
+			
+			
     			
 			double myDiscount = (discount / 100) * total;
     
@@ -282,10 +276,12 @@ public class CheckOutApp{
 			public static double totalBill() {
 
     				double subTotal = subTotal(); 
+
+				double finalDiscount = calculateDiscount();
     
 				double vat = calculateVAT(); 
 
-    				double finalBill = subTotal  + vat;
+    				double finalBill = subTotal + finalDiscount + vat;
 
 			return finalBill;
 			
