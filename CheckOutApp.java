@@ -27,10 +27,13 @@ public class CheckOutApp{
 
 	Item items;
 
-	float vatPercentage = 17.50;
+	public static double vatPercentage = 17.50;
 
 
 	public static double total;
+
+
+	public static double discount;
 
 	
 	
@@ -62,18 +65,21 @@ public class CheckOutApp{
 
 			
 
-			public static void subTotal() {
+			public static double subTotal() {
 
-    				double total = 0.0;
+    				total = 0.0;
 
     				for (Item items : itemList) {
 
         				total += items.getTotalAmount();
-
+					
     					}
 
-    				System.out.println (total);
+				//System.out.println(total);
 
+    				return total;
+
+				
 				}
 
 
@@ -89,9 +95,9 @@ public class CheckOutApp{
 				System.out.println ("What is the customer's Name?  ");
 
 					
-					String myCustomerName = input.nextLine();
+				String myCustomerName = input.nextLine();
 
-					setCustomerName(myCustomerName);
+				setCustomerName(myCustomerName);
 
 
 
@@ -127,7 +133,7 @@ public class CheckOutApp{
 
 			public static void addMoreItem(){
 
-				//Scanner input = new Scanner(System.in);
+				Scanner input = new Scanner(System.in);
 
 				System.out.println ("Add more Items? Type Yes or No  ");
 
@@ -157,7 +163,7 @@ public class CheckOutApp{
 
 			public static void repeatMenu(){
 				
-				//Scanner input = new Scanner(System.in);
+				Scanner input = new Scanner(System.in);
 
 
 				System.out.println ("What did the user buy?  ");
@@ -209,9 +215,6 @@ public class CheckOutApp{
 
 
 
-
-
-
 			public static void printItemDetails(){
     				for (Item items: itemList ) {
         			System.out.println("  " + items.getItemName() + "\t\t"+ items.getPrice() + "\t\t" + items.getQuantity() + "\t\t" + items.getTotalAmount());
@@ -241,9 +244,8 @@ public class CheckOutApp{
 			}
 			
 			
-			public static void calculateDiscount(double total, double discount) {
+			public static double calculateDiscount() {
 
-			double total = 0.0;
 
     				for (Item items : itemList) {
 
@@ -251,13 +253,19 @@ public class CheckOutApp{
 
     					}
 
-    			discount/100 * total;
+    			
+			double myDiscount = (discount / 100) * total;
+    
+			return myDiscount;
+		
+			}
 
-				}
 
-			public static void calculateVAT(double total, float vatPercentage) {
 
-				double total = 0.0;
+
+			public static double calculateVAT() {
+
+				total = 0.0;
 
     				for (Item items : itemList) {
 
@@ -265,17 +273,24 @@ public class CheckOutApp{
 
     					}
 
-
-
-    			 (vatPercentage/100)*total;
+    			return((vatPercentage/100) * total);
 
 			}
 
+
+
+			public static double totalBill() {
+
+    				double subTotal = subTotal(); 
+    
+				double vat = calculateVAT(); 
+
+    				double finalBill = subTotal  + vat;
+
+			return finalBill;
 			
+				}
 
-
-
-			
 
 			public static void customersInvoice(){
 				System.out.println("  		       ");
@@ -293,11 +308,14 @@ public class CheckOutApp{
 				System.out.println("-------------------------------------------------------------------");
 				printItemDetails();
 				System.out.println("-------------------------------------------------------------------");
-				System.out.print("\t\t\t\tSub Total:        "); subTotal();
-				System.out.print("\t\t\t\tDiscount:         " + calculateDiscount);
-				System.out.print("\t\t\t\tVAT @ 17.50% :         " + calculateVAT);
-
-	
+				System.out.println("\t\t\t\tSub Total:        " + subTotal()); 
+				System.out.println("\t\t\t\tDiscount:         " + calculateDiscount());
+				System.out.println("\t\t\t\tVAT @ 17.50% :    " + calculateVAT());
+				System.out.println("==================================================================");
+				System.out.println("\t\t\t\tBill Total:        " + totalBill()); 
+				System.out.println("==================================================================");
+				System.out.println("THIS IS NOT A RECEIPT KINDLY PAY " + totalBill());
+				System.out.println("==================================================================");
 			}
 
 
